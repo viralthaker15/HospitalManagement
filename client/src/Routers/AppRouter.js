@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "../components/Home";
 import Header from "../components/Header";
-import Dashboard from "../components/Dashboard";
 import Login from "../components/Login";
 
 // ================ Routes ================
@@ -11,7 +11,7 @@ const AppRouter = () => (
 		<div>
 			<Header />
 			<Switch>
-				<Route path='/' component={Dashboard} exact={true} />
+				<Route path='/' component={Home} exact={true} />
 				<Route path='/login' component={Login} />
 			</Switch>
 		</div>
