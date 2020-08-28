@@ -58,16 +58,16 @@ function Register() {
               </Select>
             </FormControl>
             <TextField className={classes.formControl} 
-                      type="text" 
-                      id="standard-basic" 
+                      type="email" 
+                      id="email" 
                       label="Email"
                       value={email}
-                      helperText="Enter your Username"
+                      helperText="Enter your email"
                       onChange={(e)=>setEmail(e.target.value)}
             />
             <TextField className={classes.formControl} 
                       type="text" 
-                      id="standard-basic" 
+                      id="username" 
                       label="Username"
                       value={username}
                       helperText="Enter your Username"
@@ -75,10 +75,10 @@ function Register() {
             />
             <TextField className={classes.formControl} 
                       type="password" 
-                      id="standard-basic" 
+                      id="password" 
                       label="Password"
                       value={password}
-                      helperText="Enter your Username"
+                      helperText="Enter your password"
                       onChange={(e)=>setPassword(e.target.value)}
             />
             <Button className={classes.formControl} variant="contained" color="primary" onClick={sendData}>Register</Button>
