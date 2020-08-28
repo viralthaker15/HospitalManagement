@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./models/user");
+const userRouter = require("./routers/user");
 
 require("dotenv").config({
 	path: __dirname + "/config/.env",
@@ -9,6 +10,9 @@ require("dotenv").config({
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+app.use(express.static("../client/public"));
+app.use(express.json());
+app.use(userRouter);
 
 mongoose
 	.connect(process.env.MONGODB_URL, {
@@ -21,35 +25,6 @@ mongoose
 	.catch(e => {
 		console.log("Error :", e);
 	});
-
-app.use(express.static("../client/public"));
-
-app.post("/register", (req, res) => {});
-
-app.post("/login", (req, res) => {});
-
-// User.create({
-// 	role: "admin",
-// 	username: "vikkajadiyo",
-// 	password: "Beastrider69",
-// })
-// 	.then(() => {
-// 		console.log("DATA HAS BEEND SUCCESSFULLY ADDED !");
-// 	})
-// 	.catch(e => {
-// 		console.log("Error : ", e);
-// 	});
-
-// User.findOneAndUpdate(
-// 	{ username: "vikkajadiyo" },
-// 	{
-// 		$set: {
-// 			lastLogin: Date.now(),
-// 		},
-// 	}
-// ).then(() => {
-// 	console.log("Data has been updated");
-// });
 
 app.listen(PORT, () => {
 	console.log("Server is up on port! : ", PORT);
