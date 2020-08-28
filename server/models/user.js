@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
 		username: {
 			type: String,
 			required: true,
+			unique: true,
 		},
 		password: {
 			type: String,
@@ -18,6 +19,14 @@ const userSchema = new mongoose.Schema(
 			type: Date,
 			required: false,
 		},
+		tokens: [
+			{
+				token: {
+					type: String,
+					required: true,
+				},
+			},
+		],
 	},
 	{ timestamps: true }
 );
