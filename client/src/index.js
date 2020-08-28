@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import AppRouter from "./Routers/AppRouter";
 
 ReactDOM.render(
-	<React.StrictMode>
+	<React.Fragment>
 		<AppRouter />
-	</React.StrictMode>,
+	</React.Fragment>,
 	document.getElementById("root")
 );
