@@ -8,6 +8,9 @@ export default () => {
 			<button>
 				<Link to='/login'>login</Link>
 			</button>
+			<button>
+				<Link to='/register'>Register</Link>
+			</button>
 		</div>
 	);
 };
