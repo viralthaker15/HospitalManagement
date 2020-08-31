@@ -5,18 +5,23 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 
 router.post("/register", async (req, res) => {
+	console.log(req.body)
 	const user = new User(req.body);
 	try {
 		const token = await user.generateAuthToken(); // error
 		await user.save();
 		res.status(201).send({ user, token });
 	} catch (e) {
+		console.log(e)
+
+		console.log("vikkaaaaaaaaaaaaaaaaaaaaaaaaaa")
 		res.status(400).send(e);
-	}
+	}	
 });
 
 router.post("/login", async (req, res) => {
 	try {
+		console.log(req.body)
 		const user = await User.findByCredentials(
 			req.body.username,
 			req.body.password
@@ -24,6 +29,7 @@ router.post("/login", async (req, res) => {
 		const token = await user.generateAuthToken();
 		res.send({ user, token });
 	} catch (e) {
+		console.log(e)
 		res.status(400).send(e);
 	}
 });

@@ -5,13 +5,15 @@
 	"main": "app.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node app.js"
+		"start": "nodemon app.js"
 	},
 	"author": "Viral Thaker, Nikunj Viradiya.",
 	"license": "ISC",
 	"dependencies": {
 		"bcrypt": "^5.0.0",
 		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"jsonwebtoken": "^8.5.1",

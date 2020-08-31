@@ -6,7 +6,8 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import TextField from "@material-ui/core/TextField"
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios'
+import Axios from 'axios'
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -20,26 +21,36 @@ const useStyles = makeStyles((theme) => ({
 
 function Register() {
     const classes = useStyles();
-
+    let history = useHistory();
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
     const [role,setRole] = useState("")
     const [email,setEmail] = useState("")
 
-    const sendData = () => {
+    const sendData = () => {      
       let payload = {
+        role,
         username,
         password,
-        role,
         email
       }
 
-      axios.post('/register',null,{
-        params:{
-          payload
+      Axios.post('http://127.0.0.1:5000/register',payload)
+      .then(res=>{
+        if(res.status===201){
+          if(res.data.user.role==="admin"){
+            history.push({
+              pathname:'/login',
+              state:{
+                data:res.data.user
+              }
+            })
+          }
+        }
+        else{
+          console.log(res)
         }
       })
-      .then(res=>console.log(res))
     }
 
     return (

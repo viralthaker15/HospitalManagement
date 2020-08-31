@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser")
+var cors = require('cors')
 const User = require("./models/user");
 const userRouter = require("./routers/user");
 
@@ -7,12 +9,15 @@ require("dotenv").config({
 	path: __dirname + "/config/.env",
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
+app.use(cors())
 app.use(express.static("../client/public"));
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(userRouter);
+
 
 mongoose
 	.connect(process.env.MONGODB_URL, {

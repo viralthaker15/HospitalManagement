@@ -4,17 +4,17 @@ import Home from "../components/Home";
 import Header from "../components/Header";
 import Login from "../components/Login";
 import Register from "../components/Register"
-
+import Admin from "../components/role/Admin"
 // ================ Routes ================
 
 const AppRouter = () => (
 	<BrowserRouter>
 		<div>
-			<Header />
 			<Switch>
 				<Route path='/' component={Home} exact={true} />
 				<Route path='/login' component={Login} />
 				<Route path='/register' component={Register} />
+				<Route path='/admin' component={Admin} />
 			</Switch>
 		</div>
 	</BrowserRouter>
