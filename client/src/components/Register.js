@@ -10,14 +10,18 @@ import Axios from 'axios'
 import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
-    formControl: {
-      marginRight: theme.spacing(2),
-      minWidth: 120
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  }));
+  formControl: {
+    marginRight: theme.spacing(2),
+    minWidth: 120
+  },
+  second:{
+    marginRight: theme.spacing(0.5),
+    marginTop: "40px"
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 function Register() {
     const classes = useStyles();
@@ -38,14 +42,12 @@ function Register() {
       Axios.post('http://127.0.0.1:5000/register',payload)
       .then(res=>{
         if(res.status===201){
-          if(res.data.user.role==="admin"){
-            history.push({
-              pathname:'/login',
-              state:{
-                data:res.data.user
-              }
-            })
-          }
+          history.push({
+            pathname:'/login',
+            state:{
+              data:res.data.user
+            }
+          })
         }
         else{
           console.log(res)
@@ -55,44 +57,48 @@ function Register() {
 
     return (
         <>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="role">Role</InputLabel>
-              <Select
-                labelId="Role"
-                id="role"
-                value={role}
-                onChange={e=>setRole(e.target.value)}
-              >
-                <MenuItem value="admin">Admin</MenuItem>
-                <MenuItem value="pharmacist">Pharmacist</MenuItem>
-                <MenuItem value="diagnostic">Diagnostic</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField className={classes.formControl} 
-                      type="email" 
-                      id="email" 
-                      label="Email"
-                      value={email}
-                      helperText="Enter your email"
-                      onChange={(e)=>setEmail(e.target.value)}
-            />
-            <TextField className={classes.formControl} 
-                      type="text" 
-                      id="username" 
-                      label="Username"
-                      value={username}
-                      helperText="Enter your Username"
-                      onChange={(e)=>setUsername(e.target.value)}
-            />
-            <TextField className={classes.formControl} 
-                      type="password" 
-                      id="password" 
-                      label="Password"
-                      value={password}
-                      helperText="Enter your password"
-                      onChange={(e)=>setPassword(e.target.value)}
-            />
-            <Button className={classes.formControl} variant="contained" color="primary" onClick={sendData}>Register</Button>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="role">Role</InputLabel>
+            <Select
+              labelId="Role"
+              id="role"
+              value={role}
+              onChange={e=>setRole(e.target.value)}
+            >
+              <MenuItem value="admin">Admin</MenuItem>
+              <MenuItem value="pharmacist">Pharmacist</MenuItem>
+              <MenuItem value="diagnostic">Diagnostic</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField className={classes.formControl} 
+                    type="email" 
+                    id="email" 
+                    label="Email"
+                    value={email}
+                    helperText="Enter your email"
+                    onChange={(e)=>setEmail(e.target.value)}
+          />
+          <TextField className={classes.formControl} 
+                    type="text" 
+                    id="username" 
+                    label="Username"
+                    value={username}
+                    helperText="Enter your Username"
+                    onChange={(e)=>setUsername(e.target.value)}
+          />
+          <TextField className={classes.formControl} 
+                    type="password" 
+                    id="password" 
+                    label="Password"
+                    value={password}
+                    helperText="Enter your password"
+                    onChange={(e)=>setPassword(e.target.value)}
+          />
+          <Button className={classes.formControl} variant="contained" color="primary" onClick={sendData}>Register</Button>
+          <div>
+            <Button className={classes.second} variant="contained" color="secondary" onClick={()=>history.push("/login")}>Login</Button>
+            <Button className={classes.second} variant="contained" color="secondary" onClick={()=>history.push("/")}>Cancel</Button>
+          </div>
         </>
     )
 }
