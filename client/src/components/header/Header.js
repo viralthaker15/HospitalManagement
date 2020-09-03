@@ -13,7 +13,6 @@ const Header = props => {
 					<Button
 						onClick={() => {
 							props.handleAuthentication();
-							console.log("reached");
 							history.push("/");
 						}}>
 						Logout

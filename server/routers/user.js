@@ -5,14 +5,13 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 
 router.post("/register", async (req, res) => {
-	const user = new User(req.body);
 	try {
+		const user = new User(req.body);
 		const token = await user.generateAuthToken(); // error
 		await user.save();
 		res.status(201).send({ user, token });
 	} catch (e) {
-		console.log(e);
-		if (e.name === "MongoError" || e.code === 11000) {
+		if (e.name === "MongoError" && e.code === 11000) {
 			res.status(422).send();
 		}
 	}
@@ -20,7 +19,6 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
 	try {
-		console.log(req.body);
 		const user = await User.findByCredentials(
 			req.body.username,
 			req.body.password
