@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
+import LoggedIn from "../header/LoggedIn";
 
-function Diagnostic(props){
-    const user = props.location.state.data.username
-    return (
-        <div>
-            <h1>Diagnostic</h1>
-            <h1>Welcome {user} !</h1>
-        </div>
-    )
+function Diagnostic(props) {
+	return (
+		<div>
+			<LoggedIn username={props.location.state.data.username} />
+			<h1>Diagnostic</h1>
+		</div>
+	);
 }
 
-export default Diagnostic
+export default Diagnostic;

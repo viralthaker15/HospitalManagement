@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
+import LoggedIn from "../header/LoggedIn";
 
 function Pharmacist(props) {
-    const user = props.location.state.data.username
-    return (
-        <div>
-            <h1>Pharmacist</h1>
-            <h1>Welcome {user} !</h1>
-        </div>
-    )
+	return (
+		<div>
+			<LoggedIn username={props.location.state.data.username} />
+			<h1>Pharmacist</h1>
+		</div>
+	);
 }
 
-export default Pharmacist
+export default Pharmacist;

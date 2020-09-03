@@ -5,20 +5,22 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 
 router.post("/register", async (req, res) => {
-	console.log(req.body)
 	const user = new User(req.body);
 	try {
 		const token = await user.generateAuthToken(); // error
 		await user.save();
 		res.status(201).send({ user, token });
 	} catch (e) {
-		res.status(400).send(e);
-	}	
+		console.log(e);
+		if (e.name === "MongoError" || e.code === 11000) {
+			res.status(422).send();
+		}
+	}
 });
 
 router.post("/login", async (req, res) => {
 	try {
-		console.log(req.body)
+		console.log(req.body);
 		const user = await User.findByCredentials(
 			req.body.username,
 			req.body.password
@@ -26,13 +28,12 @@ router.post("/login", async (req, res) => {
 		const token = await user.generateAuthToken();
 		res.send({ user, token });
 	} catch (e) {
-		res.status(400).send(400);
+		res.status(400).send(e);
 	}
 });
 
 router.post("/logout", auth, async (req, res) => {
 	try {
-		console.log("REACH");
 		req.user.tokens = req.user.tokens.filter(token => {
 			return token.token !== req.token;
 			//when it returns true it will iterate over and do nothing
