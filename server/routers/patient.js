@@ -14,8 +14,6 @@ router.post("/patient", async (req, res) => {
 			...req.body,
 		};
 
-		console.log(data);
-
 		const patient = new Patient(data);
 		await patient.save();
 		res.status(201).send(patient);
@@ -26,7 +24,7 @@ router.post("/patient", async (req, res) => {
 	}
 });
 
-router.get("/patients", auth, async (req, res) => {
+router.get("/patients", auth,async (req, res) => {
 	try {
 		const patients = await Patient.find();
 		res.status(200).send(patients);
