@@ -7,6 +7,7 @@ import Register from "../components/Register";
 import Admin from "../components/role/Admin";
 import Pharmacist from "../components/role/Pharmacist";
 import Diagnostic from "../components/role/Diagnostic";
+import PatientRegister from "../components/form/PatientRegister";
 
 // ================ Routes ================
 
@@ -47,6 +48,7 @@ class AppRouter extends React.Component {
 						<Route path='/admin' component={Admin} />
 						<Route path='/pharmacist' component={Pharmacist} />
 						<Route path='/diagnostic' component={Diagnostic} />
+						<Route path='/addpatient' component={PatientRegister} />
 					</Switch>
 				</div>
 			</BrowserRouter>

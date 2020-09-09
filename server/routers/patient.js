@@ -5,6 +5,7 @@ const auth = require("../middleware/auth");
 
 router.post("/patient", async (req, res) => {
 	try {
+		console.log(req.body);
 		const SSN_ID = Math.floor(100000000 + Math.random() * 900000000);
 		const pid = Math.floor(100000000 + Math.random() * 900000000);
 
@@ -18,15 +19,16 @@ router.post("/patient", async (req, res) => {
 		await patient.save();
 		res.status(201).send(patient);
 	} catch (e) {
+		console.log(e);
 		if (e.name === "MongoError" && e.code === 11000) {
 			res.status(422).send();
 		} else res.status(400).send(e);
 	}
 });
 
-router.get("/patients", auth,async (req, res) => {
+router.get("/patients", auth, async (req, res) => {
 	try {
-		const patients = await Patient.find();
+		const patients = await Patient.find({}, { _id: false });
 		res.status(200).send(patients);
 	} catch (e) {
 		res.status(500).send(e);
@@ -77,8 +79,9 @@ router.patch("/patient:id", auth, async (req, res) => {
 
 router.delete("/patient:id", auth, async (req, res) => {
 	try {
-		const patient = await Patient.findById(req.params.id);
-
+		//console.log(req.params.id);
+		const patient = await Patient.findOne({ pid: req.params.id });
+		console.log(patient);
 		if (!patient)
 			throw new Error({
 				message: "Patient not found",

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -32,6 +33,8 @@ function PatientRegister() {
 
 	// console.log(utc)
 
+	let History = useHistory();
+
 	const sendData = () => {
 		let payload = {
 			p_name,
@@ -43,8 +46,11 @@ function PatientRegister() {
 		Axios.post("http://localhost:5000/patient", payload)
 			.then(data => {
 				console.log(data);
+				History.goBack();
 			})
-			.catch(e => {});
+			.catch(e => {
+				console.log(e);
+			});
 	};
 
 	return (
